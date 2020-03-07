@@ -3,7 +3,6 @@ name: Node CI
 on:
   - push
   - pull_request
-
   strategy:
       matrix:
         node-version: [13.x]
