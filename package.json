@@ -1,11 +1,15 @@
 {
-  "name": "frontend-project-lvl1",
+  "name": "frontend-project-one-ihahn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
+  "bin": {
+    "brain-games": "bin/brain-games.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rainstr7/frontend-project-lvl1.git"
@@ -15,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/rainstr7/frontend-project-lvl1/issues"
   },
-  "homepage": "https://github.com/rainstr7/frontend-project-lvl1#readme"
+  "homepage": "https://github.com/rainstr7/frontend-project-lvl1#readme",
+  "dependencies": {}
 }
