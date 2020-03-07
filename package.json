@@ -20,5 +20,7 @@
     "url": "https://github.com/rainstr7/frontend-project-lvl1/issues"
   },
   "homepage": "https://github.com/rainstr7/frontend-project-lvl1#readme",
-  "dependencies": {}
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
