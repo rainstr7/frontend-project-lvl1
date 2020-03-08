@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import introUser from '../src/index.js';
 
-console.log('Welcome to the Brain Games!\n');
+import { welcomeUser, introUser } from '../src/index.js';
+
+welcomeUser();
 introUser();
