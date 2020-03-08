@@ -7,7 +7,10 @@ start:
 	node bin/brain-games.js
 
 publish:
-	npm publish --dry-run
+	sudo npm publish --dry-run
+
+make link:
+	sudo npm link
 
 make lint:
 	npx eslint .
