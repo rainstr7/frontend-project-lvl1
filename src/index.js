@@ -78,3 +78,72 @@ Let's try again, ${name}!`);
   console.log(`Congratulations, ${name}!`);
   return true;
 };
+const generateTrueAnswer2 = (number1, number2) => {
+  let gcd = 1;
+  for (let i = 1; i <= number1 && i <= number2; i += 1) {
+    if (number1 % i === 0 && number2 % i === 0) {
+      gcd = i;
+    }
+  }
+  return String(gcd);
+};
+
+export const gameGcd = () => {
+  welcomeUser();
+  const [minDiaposon, maxDiaposon] = [0, 101];
+  const name = introUser();
+  console.log('What is the result of the expression?');
+  for (let i = 0; i < 3; i += 1) {
+    const number1 = getRandom(minDiaposon, maxDiaposon);
+    const number2 = getRandom(minDiaposon, maxDiaposon);
+    console.log(`Question: ${number1} ${number2}`);
+    const answerUser = readlineSync.question('Your answer: ');
+    const correctAnswer = generateTrueAnswer2(number1, number2);
+    const resoult = isResoutGame(answerUser, correctAnswer);
+    if (!resoult) {
+      console.log(`"${answerUser}" is wrong answer ;(. Correct answer was "${correctAnswer}".
+Let's try again, ${name}!`);
+      return false;
+    }
+    console.log('Correct!');
+  }
+  console.log(`Congratulations, ${name}!`);
+  return true;
+};
+const generateProgression = () => {
+  const firstElement = getRandom(0, 100);
+  const step = getRandom(0, 100);
+  const result = [firstElement];
+  for (let i = 0; i < 9; i += 1) {
+    result.push(result[i] + step);
+  }
+  return result;
+};
+
+const hideIndexProgression = (progression, index) => {
+  const progressionWithHideEl = [...progression];
+  progressionWithHideEl[index] = '..';
+  return progressionWithHideEl;
+};
+
+export const gameProgression = () => {
+  welcomeUser();
+  const name = introUser();
+  console.log('What number is missing in the progression?');
+  for (let i = 0; i < 3; i += 1) {
+    const progression = generateProgression();
+    const hideIndex = getRandom(0, 10);
+    console.log(`Question: ${hideIndexProgression(progression, hideIndex)}`);
+    const answerUser = readlineSync.question('Your answer: ');
+    const correctAnswer = String(progression[hideIndex]);
+    const resoult = isResoutGame(answerUser, correctAnswer);
+    if (!resoult) {
+      console.log(`"${answerUser}" is wrong answer ;(. Correct answer was "${correctAnswer}".
+Let's try again, ${name}!`);
+      return false;
+    }
+    console.log('Correct!');
+  }
+  console.log(`Congratulations, ${name}!`);
+  return true;
+};
