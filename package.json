@@ -2,6 +2,13 @@
   "name": "frontend-project-one-ihahn",
   "version": "1.0.0",
   "description": "",
+  "keywords": ["brain-games",
+    "brain-even",
+    "brain-calc",
+    "brain-gcd",
+    "brain-prime",
+    "brain-progression"
+  ],
   "main": "src/index.js",
   "bin": {
     "brain-games": "bin/brain-games.js",
@@ -26,9 +33,11 @@
   },
   "homepage": "https://github.com/rainstr7/frontend-project-lvl1#readme",
   "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "readline-sync": "^1.4.10"
+    "eslint-plugin-import": "^2.20.1"
   }
 }

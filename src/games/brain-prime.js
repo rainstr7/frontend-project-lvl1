@@ -9,7 +9,7 @@ import {
   postGameOver,
   postCorrectResoult,
   postCongratulations,
-} from '../src/index.js';
+} from '../index.js';
 
 const isPrime = (number) => {
   if (number < 2) {
@@ -25,7 +25,7 @@ const isPrime = (number) => {
 
 const getCorrectAnswer = (number) => (isPrime(number) === true ? 'yes' : 'no');
 
-const gamePrime = () => {
+const runGamePrime = () => {
   welcomeUser();
   const [minDiaposon, maxDiaposon] = [0, 101];
   const name = introUser();
@@ -46,4 +46,4 @@ const gamePrime = () => {
   return true;
 };
 
-export default gamePrime;
+export default runGamePrime;

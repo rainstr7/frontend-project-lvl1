@@ -9,30 +9,39 @@ import {
   postGameOver,
   postCorrectResoult,
   postCongratulations,
-} from '../src/index.js';
+} from '../index.js';
 
-const getCorrectAnswer = (number1, number2) => {
-  let gcd = 1;
-  for (let i = 1; i <= number1 && i <= number2; i += 1) {
-    if (number1 % i === 0 && number2 % i === 0) {
-      gcd = i;
-    }
+const getCorrectAnswer = (number1, number2, sign) => {
+  switch (sign) {
+    case '+': return number1 + number2;
+    case '-': return number1 - number2;
+    case '*': return number1 * number2;
+    default: return false;
   }
-  return gcd;
 };
 
-const gameGcd = () => {
+const generateSign = (number) => {
+  switch (number) {
+    case 0: return '+';
+    case 1: return '-';
+    case 2: return '*';
+    default: return false;
+  }
+};
+
+const runGameCalc = () => {
   welcomeUser();
   const [minDiaposon, maxDiaposon] = [0, 101];
   const name = introUser();
-  const rulesGame = 'Find the greatest common divisor of given numbers.';
+  const rulesGame = 'What is the result of the expression?';
   postRules(rulesGame);
   for (let i = 0; i < 3; i += 1) {
     const number1 = getRandom(minDiaposon, maxDiaposon);
     const number2 = getRandom(minDiaposon, maxDiaposon);
-    postQuestion(number1, number2);
+    const sign = generateSign(getRandom(0, 3));
+    postQuestion(number1, sign, number2);
     const answerUser = getUserAnswer();
-    const correctAnswer = getCorrectAnswer(number1, number2);
+    const correctAnswer = getCorrectAnswer(number1, number2, sign);
     const resoult = isResult(answerUser, correctAnswer);
     if (!resoult) {
       return postGameOver(answerUser, correctAnswer, name);
@@ -43,4 +52,4 @@ const gameGcd = () => {
   return true;
 };
 
-export default gameGcd;
+export default runGameCalc;

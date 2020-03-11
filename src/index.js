@@ -29,7 +29,10 @@ export const getUserAnswer = () => readlineSync.question('Your answer: ');
 export const isResult = (userAnswer, correctAnswer) => {
   const answer1 = String(userAnswer).toLowerCase();
   const answer2 = String(correctAnswer).toLowerCase();
-  return (answer1 === answer2 ? true : false);
+  if (answer1 === answer2) {
+    return true;
+  }
+  return false;
 };
 
 export const postGameOver = (answerUser, correctAnswer, name) => {

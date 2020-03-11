@@ -9,8 +9,8 @@ start:
 publish:
 	sudo npm publish --dry-run
 
-make link:
+link:
 	sudo npm link
 
-make lint:
+lint:
 	npx eslint .

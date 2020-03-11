@@ -9,13 +9,23 @@ import {
   postGameOver,
   postCorrectResoult,
   postCongratulations,
-} from '../src/index.js';
+} from '../index.js';
 
-const isEven = (number) => (number % 2 === 0 ? true : false);
+const isEven = (number) => {
+  if (number % 2 === 0) {
+    return true;
+  }
+  return false;
+};
 
-const getCorrectAnswer = (number) => (isEven(number) === true ? 'yes' : 'no');
+const getCorrectAnswer = (number) => {
+  if (isEven(number)) {
+    return 'yes';
+  }
+  return 'no';
+};
 
-const gameEven = () => {
+const runGameEven = () => {
   welcomeUser();
   const [minDiaposon, maxDiaposon] = [0, 101];
   const name = introUser();
@@ -36,4 +46,4 @@ const gameEven = () => {
   return true;
 };
 
-export default gameEven;
+export default runGameEven;

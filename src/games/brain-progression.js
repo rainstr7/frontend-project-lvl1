@@ -9,7 +9,7 @@ import {
   postGameOver,
   postCorrectResoult,
   postCongratulations,
-} from '../src/index.js';
+} from '../index.js';
 
 const generateProgression = (minDiaposon, maxDiaposon) => {
   const firstElement = getRandom(minDiaposon, maxDiaposon);
@@ -29,7 +29,7 @@ const hideIndexProgression = (progression, index) => {
 
 const getCorrectAnswer = (progression, hideIndex) => progression[hideIndex];
 
-const gameProgression = () => {
+const runGameProgression = () => {
   welcomeUser();
   const [minDiaposon, maxDiaposon] = [0, 101];
   const name = introUser();
@@ -51,4 +51,4 @@ const gameProgression = () => {
   return true;
 };
 
-export default gameProgression;
+export default runGameProgression;
