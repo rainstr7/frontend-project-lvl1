@@ -1,15 +1,4 @@
-import {
-  welcomeUser,
-  introUser,
-  postRules,
-  getRandom,
-  postQuestion,
-  getUserAnswer,
-  isResult,
-  postGameOver,
-  postCorrectResoult,
-  postCongratulations,
-} from '../index.js';
+import gameEngine from '../index.js';
 
 const isEven = (number) => {
   if (number % 2 === 0) {
@@ -26,24 +15,15 @@ const getCorrectAnswer = (number) => {
 };
 
 const runGameEven = () => {
-  welcomeUser();
-  const [minDiaposon, maxDiaposon] = [0, 101];
-  const name = introUser();
   const rulesGame = 'Answer "yes" if the number is even, otherwise answer "no".';
-  postRules(rulesGame);
-  for (let i = 0; i < 3; i += 1) {
-    const number = getRandom(minDiaposon, maxDiaposon);
-    postQuestion(number);
-    const answerUser = getUserAnswer();
+  const getRound = (number) => {
     const correctAnswer = getCorrectAnswer(number);
-    const resoult = isResult(answerUser, correctAnswer);
-    if (!resoult) {
-      return postGameOver(answerUser, correctAnswer, name);
-    }
-    postCorrectResoult();
-  }
-  postCongratulations(name);
-  return true;
+    return {
+      elements: number,
+      answer: correctAnswer,
+    };
+  };
+  gameEngine(rulesGame, getRound);
 };
 
 export default runGameEven;

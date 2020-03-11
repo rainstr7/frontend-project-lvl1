@@ -1,10 +1,10 @@
 import readlineSync from 'readline-sync';
 
-export const welcomeUser = () => {
+const welcomeUser = () => {
   console.log('Welcome to the Brain Games!\n');
 };
 
-export const introUser = () => {
+const introUser = () => {
   let userName = readlineSync.question('May I have your name? ');
   if (userName === '') {
     userName = 'noname';
@@ -13,9 +13,9 @@ export const introUser = () => {
   return userName;
 };
 
-export const postRules = (rules) => console.log(rules);
+const postRules = (rules) => console.log(rules);
 
-export const postQuestion = (...elemets) => {
+const postQuestion = (...elemets) => {
   let questionString = 'Question:';
   const newElements = elemets.reduce((acc, val) => acc.concat(val), []);
   for (let i = 0; i < newElements.length; i += 1) {
@@ -24,9 +24,9 @@ export const postQuestion = (...elemets) => {
   console.log(questionString);
 };
 
-export const getUserAnswer = () => readlineSync.question('Your answer: ');
+const getUserAnswer = () => readlineSync.question('Your answer: ');
 
-export const isResult = (userAnswer, correctAnswer) => {
+const isResult = (userAnswer, correctAnswer) => {
   const answer1 = String(userAnswer).toLowerCase();
   const answer2 = String(correctAnswer).toLowerCase();
   if (answer1 === answer2) {
@@ -35,14 +35,38 @@ export const isResult = (userAnswer, correctAnswer) => {
   return false;
 };
 
-export const postGameOver = (answerUser, correctAnswer, name) => {
+const postGameOver = (answerUser, correctAnswer, name) => {
   console.log(`"${answerUser}" is wrong answer ;(. Correct answer was "${correctAnswer}".
 Let's try again, ${name}!`);
   return false;
 };
 
-export const postCorrectResoult = () => console.log('Correct!');
+const postCorrectResoult = () => console.log('Correct!');
 
-export const postCongratulations = (name) => console.log(`Congratulations, ${name}!`);
+const postCongratulations = (name) => console.log(`Congratulations, ${name}!`);
 
-export const getRandom = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const getRandom = () => {
+  const [minDiaposon, maxDiaposon] = [0, 101];
+  return Math.floor(Math.random() * (maxDiaposon - minDiaposon)) + minDiaposon;
+};
+
+const gameEngine = (rulesGame, getRound) => {
+  welcomeUser();
+  const name = introUser();
+  postRules(rulesGame);
+  for (let i = 0; i < 3; i += 1) {
+    const round = getRound(getRandom());
+    postQuestion(round.elements);
+    const answerUser = getUserAnswer();
+    const correctAnswer = round.answer;
+    const resoult = isResult(answerUser, correctAnswer);
+    if (!resoult) {
+      return postGameOver(answerUser, correctAnswer, name);
+    }
+    postCorrectResoult();
+  }
+  postCongratulations(name);
+  return true;
+};
+
+export default gameEngine;
