@@ -1,27 +1,17 @@
-import {
-  welcomeUser,
-  introUser,
-  postRules,
-  getRandom,
-  postQuestion,
-  getUserAnswer,
-  isResult,
-  postGameOver,
-  postCorrectResoult,
-  postCongratulations,
-} from '../index.js';
+import gameEngine from '../index.js';
+import getRandom from '../utils.js';
 
-const generateProgression = (minDiaposon, maxDiaposon) => {
-  const firstElement = getRandom(minDiaposon, maxDiaposon);
-  const step = getRandom(minDiaposon, maxDiaposon);
+const getNewProgression = (length) => {
+  const firstElement = getRandom();
+  const step = getRandom();
   const result = [firstElement];
-  for (let i = 0; i < 9; i += 1) {
+  for (let i = 0; i < length - 1; i += 1) {
     result.push(result[i] + step);
   }
   return result;
 };
 
-const hideIndexProgression = (progression, index) => {
+const getHideIndexProgression = (progression, index) => {
   const progressionWithHideEl = [...progression];
   progressionWithHideEl[index] = '..';
   return progressionWithHideEl;
@@ -29,26 +19,19 @@ const hideIndexProgression = (progression, index) => {
 
 const getCorrectAnswer = (progression, hideIndex) => progression[hideIndex];
 
-const runGameProgression = () => {
-  welcomeUser();
-  const [minDiaposon, maxDiaposon] = [0, 101];
-  const name = introUser();
-  const rulesGame = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-  postRules(rulesGame);
-  for (let i = 0; i < 3; i += 1) {
-    const progression = generateProgression(minDiaposon, maxDiaposon);
-    const hideIndex = getRandom(0, 10);
-    postQuestion(hideIndexProgression(progression, hideIndex));
-    const answerUser = getUserAnswer();
-    const correctAnswer = getCorrectAnswer(progression, hideIndex);
-    const resoult = isResult(answerUser, correctAnswer);
-    if (!resoult) {
-      return postGameOver(answerUser, correctAnswer, name);
-    }
-    postCorrectResoult();
-  }
-  postCongratulations(name);
-  return true;
+const runGameEven = () => {
+  const rulesGame = 'What number is missing in the progression?';
+  const getRound = () => {
+    const progression = getNewProgression(10);
+    const numberHideIndex = getRandom(0, 10);
+    const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
+    const correctAnswer = getCorrectAnswer(progression, numberHideIndex);
+    return {
+      elements: hideIndexProgression,
+      answer: correctAnswer,
+    };
+  };
+  gameEngine(rulesGame, getRound);
 };
 
-export default runGameProgression;
+export default runGameEven;

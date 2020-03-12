@@ -1,15 +1,5 @@
-import {
-  welcomeUser,
-  introUser,
-  postRules,
-  getRandom,
-  postQuestion,
-  getUserAnswer,
-  isResult,
-  postGameOver,
-  postCorrectResoult,
-  postCongratulations,
-} from '../index.js';
+import gameEngine from '../index.js';
+import getRandom from '../utils.js';
 
 const getCorrectAnswer = (number1, number2) => {
   let gcd = 1;
@@ -20,27 +10,18 @@ const getCorrectAnswer = (number1, number2) => {
   }
   return gcd;
 };
-
 const runGameGcd = () => {
-  welcomeUser();
-  const [minDiaposon, maxDiaposon] = [0, 101];
-  const name = introUser();
   const rulesGame = 'Find the greatest common divisor of given numbers.';
-  postRules(rulesGame);
-  for (let i = 0; i < 3; i += 1) {
-    const number1 = getRandom(minDiaposon, maxDiaposon);
-    const number2 = getRandom(minDiaposon, maxDiaposon);
-    postQuestion(number1, number2);
-    const answerUser = getUserAnswer();
+  const getRound = () => {
+    const number1 = getRandom();
+    const number2 = getRandom();
     const correctAnswer = getCorrectAnswer(number1, number2);
-    const resoult = isResult(answerUser, correctAnswer);
-    if (!resoult) {
-      return postGameOver(answerUser, correctAnswer, name);
-    }
-    postCorrectResoult();
-  }
-  postCongratulations(name);
-  return true;
+    return {
+      elements: [number1, number2],
+      answer: correctAnswer,
+    };
+  };
+  gameEngine(rulesGame, getRound);
 };
 
 export default runGameGcd;

@@ -45,17 +45,12 @@ const postCorrectResoult = () => console.log('Correct!');
 
 const postCongratulations = (name) => console.log(`Congratulations, ${name}!`);
 
-const getRandom = () => {
-  const [minDiaposon, maxDiaposon] = [0, 101];
-  return Math.floor(Math.random() * (maxDiaposon - minDiaposon)) + minDiaposon;
-};
-
 const gameEngine = (rulesGame, getRound) => {
   welcomeUser();
   const name = introUser();
   postRules(rulesGame);
   for (let i = 0; i < 3; i += 1) {
-    const round = getRound(getRandom());
+    const round = getRound();
     postQuestion(round.elements);
     const answerUser = getUserAnswer();
     const correctAnswer = round.answer;
