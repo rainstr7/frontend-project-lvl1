@@ -6,8 +6,8 @@ const getArithmeticProgression = (element, step, length = 10) => {
     return element;
   }
   element.push(element[element.length - 1] + step);
-  return getArithmeticProgression(element, step)
-}
+  return getArithmeticProgression(element, step);
+};
 
 const getNewProgression = () => {
   const firstElement = [getRandom()];
@@ -16,7 +16,7 @@ const getNewProgression = () => {
 };
 
 const getHideIndexProgression = (progression, index) => progression
-  .map((element,current) => current === index ? '..' : element);
+  .map((element, current) => (current === index ? '..' : element));
 
 const rulesGame = 'What number is missing in the progression?';
 
@@ -26,8 +26,8 @@ const getRound = () => {
   const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
   const correctAnswer = `${progression[numberHideIndex]}`;
   return {
-      elements: hideIndexProgression,
-      correctAnswer,
+    elements: hideIndexProgression,
+    correctAnswer,
   };
 };
 

@@ -3,10 +3,11 @@ import getRandom from '../utils.js';
 
 const isPrime = (number) => {
   const sqrtNumber = Math.sqrt(number);
-  for(let i = 2; i <= sqrtNumber; i++)
-    if(number % i === 0) {
+  for (let i = 2; i <= sqrtNumber; i += 1) {
+    if (number % i === 0) {
       return false;
-    } 
+    }
+  }
   return number > 1;
 };
 
