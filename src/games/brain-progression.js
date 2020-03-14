@@ -1,37 +1,36 @@
 import gameEngine from '../index.js';
 import getRandom from '../utils.js';
 
-const getNewProgression = (length) => {
-  const firstElement = getRandom();
-  const step = getRandom();
-  const result = [firstElement];
-  for (let i = 0; i < length - 1; i += 1) {
-    result.push(result[i] + step);
+const getArithmeticProgression = (element, step, length = 10) => {
+  if (element.length === length) {
+    return element;
   }
-  return result;
+  element.push(element[element.length - 1] + step);
+  return getArithmeticProgression(element, step)
+}
+
+const getNewProgression = () => {
+  const firstElement = [getRandom()];
+  const step = getRandom();
+  return getArithmeticProgression(firstElement, step);
 };
 
-const getHideIndexProgression = (progression, index) => {
-  const progressionWithHideEl = [...progression];
-  progressionWithHideEl[index] = '..';
-  return progressionWithHideEl;
-};
+const getHideIndexProgression = (progression, index) => progression
+  .map((element,current) => current === index ? '..' : element);
 
-const getCorrectAnswer = (progression, hideIndex) => progression[hideIndex];
+const rulesGame = 'What number is missing in the progression?';
 
-const runGameEven = () => {
-  const rulesGame = 'What number is missing in the progression?';
-  const getRound = () => {
-    const progression = getNewProgression(10);
-    const numberHideIndex = getRandom(0, 10);
-    const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
-    const correctAnswer = getCorrectAnswer(progression, numberHideIndex);
-    return {
+const getRound = () => {
+  const progression = getNewProgression();
+  const numberHideIndex = getRandom(0, 10);
+  const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
+  const correctAnswer = `${progression[numberHideIndex]}`;
+  return {
       elements: hideIndexProgression,
-      answer: correctAnswer,
-    };
+      correctAnswer,
   };
-  gameEngine(rulesGame, getRound);
 };
+
+const runGameEven = () => gameEngine(rulesGame, getRound);
 
 export default runGameEven;

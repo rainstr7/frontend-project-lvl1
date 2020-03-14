@@ -1,20 +1,5 @@
 import readlineSync from 'readline-sync';
 
-const welcomeUser = () => {
-  console.log('Welcome to the Brain Games!\n');
-};
-
-const introUser = () => {
-  let userName = readlineSync.question('May I have your name? ');
-  if (userName === '') {
-    userName = 'noname';
-  }
-  console.log(`Hello, ${userName}!`);
-  return userName;
-};
-
-const postRules = (rules) => console.log(rules);
-
 const postQuestion = (...elemets) => {
   let questionString = 'Question:';
   const newElements = elemets.reduce((acc, val) => acc.concat(val), []);
@@ -24,43 +9,25 @@ const postQuestion = (...elemets) => {
   console.log(questionString);
 };
 
-const getUserAnswer = () => readlineSync.question('Your answer: ');
-
-const isResult = (userAnswer, correctAnswer) => {
-  const answer1 = String(userAnswer).toLowerCase();
-  const answer2 = String(correctAnswer).toLowerCase();
-  if (answer1 === answer2) {
-    return true;
-  }
-  return false;
-};
-
-const postGameOver = (answerUser, correctAnswer, name) => {
-  console.log(`"${answerUser}" is wrong answer ;(. Correct answer was "${correctAnswer}".
-Let's try again, ${name}!`);
-  return false;
-};
-
-const postCorrectResoult = () => console.log('Correct!');
-
-const postCongratulations = (name) => console.log(`Congratulations, ${name}!`);
+const isResult = (userAnswer, correctAnswer) => userAnswer.toLowerCase() === correctAnswer;
 
 const gameEngine = (rulesGame, getRound) => {
-  welcomeUser();
-  const name = introUser();
-  postRules(rulesGame);
+  console.log('Welcome to the Brain Games!\n');
+  const name = readlineSync.question('May I have your name? ') || 'no name';
+  console.log(`Hello, ${name}!`);
+  console.log(rulesGame);
   for (let i = 0; i < 3; i += 1) {
     const round = getRound();
     postQuestion(round.elements);
-    const answerUser = getUserAnswer();
-    const correctAnswer = round.answer;
-    const resoult = isResult(answerUser, correctAnswer);
-    if (!resoult) {
-      return postGameOver(answerUser, correctAnswer, name);
+    const answerUser = readlineSync.question('Your answer: ');
+    if (!(isResult(answerUser, round.correctAnswer))) {
+      console.log(`"${answerUser || 'no answer'}" is wrong answer ;(. Correct answer was "${round.correctAnswer}".
+Let's try again, ${name}!`);
+      return false;
     }
-    postCorrectResoult();
+    console.log('Correct!');
   }
-  postCongratulations(name);
+  console.log(`Congratulations, ${name}!`);
   return true;
 };
 
