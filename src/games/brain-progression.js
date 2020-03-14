@@ -9,19 +9,13 @@ const getArithmeticProgression = (element, step, length = 10) => {
   return getArithmeticProgression(element, step);
 };
 
-const getNewProgression = () => {
-  const firstElement = [getRandom()];
-  const step = getRandom();
-  return getArithmeticProgression(firstElement, step);
-};
-
 const getHideIndexProgression = (progression, index) => progression
   .map((element, current) => (current === index ? '..' : element));
 
 const rulesGame = 'What number is missing in the progression?';
 
 const getRound = () => {
-  const progression = getNewProgression();
+  const progression = getArithmeticProgression([getRandom()], getRandom());
   const numberHideIndex = getRandom(0, 10);
   const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
   const correctAnswer = `${progression[numberHideIndex]}`;
