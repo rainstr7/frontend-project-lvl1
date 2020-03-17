@@ -1,4 +1,4 @@
-import gameEngine from '../index.js';
+import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
 const getArithmeticProgression = (element, step, length = 10) => {
@@ -12,19 +12,20 @@ const getArithmeticProgression = (element, step, length = 10) => {
 const getHideIndexProgression = (progression, index) => progression
   .map((element, current) => (current === index ? '..' : element));
 
-const rulesGame = 'What number is missing in the progression?';
+const description = 'What number is missing in the progression?';
 
-const getRound = () => {
+const getGameData = () => {
   const progression = getArithmeticProgression([getRandom()], getRandom());
-  const numberHideIndex = getRandom(0, 10);
+  const numberHideIndex = getRandom(0, 9);
   const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
-  const correctAnswer = `${progression[numberHideIndex]}`;
+  const question = hideIndexProgression.join(' ');
+  const correctAnswer = String(progression[numberHideIndex]);
   return {
-    elements: hideIndexProgression,
+    question,
     correctAnswer,
   };
 };
 
-const runGameEven = () => gameEngine(rulesGame, getRound);
+const runGameEven = () => runGameEngine(description, getGameData);
 
 export default runGameEven;

@@ -1,4 +1,4 @@
-import gameEngine from '../index.js';
+import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
 const getCorrectAnswer = (number1, number2, signRound) => {
@@ -9,23 +9,24 @@ const getCorrectAnswer = (number1, number2, signRound) => {
     default: return false;
   }
 };
-const allSign = ['+', '-', '*'];
+const allOperators = ['+', '-', '*'];
 
-const getSign = (selectIndex) => allSign[selectIndex];
+const getOperator = (selectIndex) => allOperators[selectIndex];
 
-const rulesGame = 'What is the result of the expression?';
+const description = 'What is the result of the expression?';
 
-const getRound = () => {
+const getGameData = () => {
   const number1 = getRandom();
   const number2 = getRandom();
-  const sign = getSign(getRandom(0, allSign.length));
-  const correctAnswer = `${getCorrectAnswer(number1, number2, sign)}`;
+  const operator = getOperator(getRandom(0, allOperators.length - 1));
+  const question = `${number1} ${operator} ${number2}`;
+  const correctAnswer = String(getCorrectAnswer(number1, number2, operator));
   return {
-    elements: [number1, sign, number2],
+    question,
     correctAnswer,
   };
 };
 
-const runGameCalc = () => gameEngine(rulesGame, getRound);
+const runGameCalc = () => runGameEngine(description, getGameData);
 
 export default runGameCalc;

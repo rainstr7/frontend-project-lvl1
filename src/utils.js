@@ -1,4 +1,4 @@
-const getRandom = (minDiaposon = 0, maxDiaposon = 101) => Math
-  .floor(Math.random() * (maxDiaposon - minDiaposon)) + minDiaposon;
+const getRandom = (min = 0, max = 100) => Math
+  .floor(Math.random() * (max - min + 1)) + min;
 
 export default getRandom;

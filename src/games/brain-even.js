@@ -1,23 +1,24 @@
-import gameEngine from '../index.js';
+import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
 const isEven = (number) => number % 2 === 0;
 
 const getCorrectAnswer = (number) => (isEven(number) ? 'yes' : 'no');
 
-const getRound = () => {
+const getGameData = () => {
   const number = getRandom();
+  const question = String(number);
   const correctAnswer = getCorrectAnswer(number);
   return {
-    elements: number,
+    question,
     correctAnswer,
   };
 };
 
-const rulesGame = 'Answer "yes" if the number is even, otherwise answer "no".';
+const description = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 const runGameEven = () => {
-  gameEngine(rulesGame, getRound);
+  runGameEngine(description, getGameData);
 };
 
 export default runGameEven;

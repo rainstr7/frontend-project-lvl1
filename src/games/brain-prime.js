@@ -1,4 +1,4 @@
-import gameEngine from '../index.js';
+import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
 const isPrime = (number) => {
@@ -14,16 +14,17 @@ const isPrime = (number) => {
 const getCorrectAnswer = (number) => (isPrime(number) ? 'yes' : 'no');
 
 const runGamePrime = () => {
-  const rulesGame = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-  const getRound = () => {
+  const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+  const getGameData = () => {
     const number = getRandom();
     const correctAnswer = `${getCorrectAnswer(number)}`;
+    const question = String(number);
     return {
-      elements: number,
+      question,
       correctAnswer,
     };
   };
-  gameEngine(rulesGame, getRound);
+  runGameEngine(description, getGameData);
 };
 
 export default runGamePrime;
