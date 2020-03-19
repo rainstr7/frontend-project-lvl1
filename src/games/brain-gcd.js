@@ -1,9 +1,11 @@
 import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
-const getCorrectAnswer = (number1, number2) => {
+const getGcd = (number1, number2) => {
   let [x, y] = [number1, number2];
-  while (y !== 0) y = x % (x = y);
+  while (y !== 0) {
+    y = x % (x = y);
+  }
   return x;
 };
 
@@ -13,7 +15,7 @@ const getGameData = () => {
   const number1 = getRandom();
   const number2 = getRandom();
   const question = `${number1} ${number2}`;
-  const correctAnswer = String(getCorrectAnswer(number1, number2));
+  const correctAnswer = String(getGcd(number1, number2));
   return {
     question,
     correctAnswer,

@@ -13,18 +13,18 @@ const isPrime = (number) => {
 
 const getCorrectAnswer = (number) => (isPrime(number) ? 'yes' : 'no');
 
-const runGamePrime = () => {
-  const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-  const getGameData = () => {
-    const number = getRandom();
-    const correctAnswer = `${getCorrectAnswer(number)}`;
-    const question = String(number);
-    return {
-      question,
-      correctAnswer,
-    };
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+
+const getGameData = () => {
+  const number = getRandom();
+  const correctAnswer = String(getCorrectAnswer(number));
+  const question = String(number);
+  return {
+    question,
+    correctAnswer,
   };
-  runGameEngine(description, getGameData);
 };
+
+const runGamePrime = () => runGameEngine(description, getGameData);
 
 export default runGamePrime;

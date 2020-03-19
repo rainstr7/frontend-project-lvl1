@@ -1,25 +1,32 @@
 import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
-const getArithmeticProgression = (element, step, length = 10) => {
-  if (element.length === length) {
-    return element;
-  }
-  element.push(element[element.length - 1] + step);
-  return getArithmeticProgression(element, step);
+const progressionLength = 10;
+
+const getArithmeticProgression = (element, step) => {
+  const progression = [element];
+  const iterations = () => {
+    if (progression.length === progressionLength) {
+      return progression;
+    }
+    progression.push(progression[progression.length - 1] + step);
+    return iterations(progression, step);
+  };
+  return iterations();
 };
 
-const getHideIndexProgression = (progression, index) => progression
+const getProgressionWithMissing = (progression, index) => progression
   .map((element, current) => (current === index ? '..' : element));
 
 const description = 'What number is missing in the progression?';
 
+
 const getGameData = () => {
-  const progression = getArithmeticProgression([getRandom()], getRandom());
-  const numberHideIndex = getRandom(0, 9);
-  const hideIndexProgression = getHideIndexProgression(progression, numberHideIndex);
-  const question = hideIndexProgression.join(' ');
-  const correctAnswer = String(progression[numberHideIndex]);
+  const progression = getArithmeticProgression(getRandom(), getRandom());
+  const indexMissing = getRandom(0, progressionLength - 1);
+  const progressionWithMissing = getProgressionWithMissing(progression, indexMissing);
+  const question = progressionWithMissing.join(' ');
+  const correctAnswer = String(progression[indexMissing]);
   return {
     question,
     correctAnswer,
