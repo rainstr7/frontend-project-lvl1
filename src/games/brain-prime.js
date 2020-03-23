@@ -2,13 +2,16 @@ import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
 const isPrime = (number) => {
+  if (number < 1) {
+    return false;
+  }
   const sqrtNumber = Math.sqrt(number);
   for (let i = 2; i <= sqrtNumber; i += 1) {
     if (number % i === 0) {
       return false;
     }
   }
-  return number > 1;
+  return true;
 };
 
 const getCorrectAnswer = (number) => (isPrime(number) ? 'yes' : 'no');

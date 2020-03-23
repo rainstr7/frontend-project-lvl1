@@ -11,14 +11,12 @@ const getCalc = (number1, number2, operator) => {
 };
 const operators = ['+', '-', '*'];
 
-const getOperator = (selectIndex) => operators[selectIndex];
-
 const description = 'What is the result of the expression?';
 
 const getGameData = () => {
   const number1 = getRandom();
   const number2 = getRandom();
-  const operator = getOperator(getRandom(0, operators.length - 1));
+  const operator = operators[getRandom(0, operators.length - 1)];
   const question = `${number1} ${operator} ${number2}`;
   const correctAnswer = String(getCalc(number1, number2, operator));
   return {
