@@ -3,12 +3,12 @@ import getRandom from '../utils.js';
 
 const progressionLength = 10;
 
-const getArithmeticProgression = (firstElement, step) => {
-  const arithmeticProgression = [];
+const getProgression = (firstElement, step) => {
+  const progression = [];
   for (let i = 0; i < progressionLength; i += 1) {
-    arithmeticProgression.push(firstElement + i * step);
+    progression.push(firstElement + i * step);
   }
-  return arithmeticProgression;
+  return progression;
 };
 
 const description = 'What number is missing in the progression?';
@@ -17,7 +17,7 @@ const description = 'What number is missing in the progression?';
 const getGameData = () => {
   const firstElement = getRandom();
   const step = getRandom();
-  const progression = getArithmeticProgression(firstElement, step);
+  const progression = getProgression(firstElement, step);
   const hiddenMemberIndex = getRandom(0, progressionLength - 1);
   const correctAnswer = String(progression[hiddenMemberIndex]);
   progression[hiddenMemberIndex] = '..';

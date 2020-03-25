@@ -2,7 +2,7 @@ import runGameEngine from '../index.js';
 import getRandom from '../utils.js';
 
 const isPrime = (number) => {
-  if (number < 1) {
+  if (number < 2) {
     return false;
   }
   const sqrtNumber = Math.sqrt(number);

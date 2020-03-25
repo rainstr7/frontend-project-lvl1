@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-import '../src/games/brain-games.js';
+import welcomeUser from '../src/games/brain-games.js';
+
+welcomeUser();
